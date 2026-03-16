@@ -1,0 +1,1324 @@
+/**
+ * School Calendar Frontend Styles
+ */
+
+/* ==========================================================================
+   Calendar Wrapper
+   ========================================================================== */
+
+.sc-calendar-wrapper {
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.sc-calendar-wrapper.sc-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 100;
+}
+
+.sc-calendar-wrapper.sc-loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0984e3;
+    border-radius: 50%;
+    animation: sc-spin 1s linear infinite;
+    z-index: 101;
+}
+
+@keyframes sc-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Filters
+   ========================================================================== */
+
+.sc-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.sc-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sc-filter-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    white-space: nowrap;
+}
+
+.sc-filter-group select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    min-width: 150px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sc-filter-group select:hover {
+    border-color: #0984e3;
+}
+
+.sc-filter-group select:focus {
+    outline: none;
+    border-color: #0984e3;
+    box-shadow: 0 0 0 3px rgba(9, 132, 227, 0.15);
+}
+
+.sc-filter-group select:disabled {
+    background: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* View buttons */
+.sc-filter-views {
+    margin-left: auto;
+}
+
+.sc-view-btn {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sc-view-btn:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.sc-view-btn:last-child {
+    border-radius: 0 6px 6px 0;
+}
+
+.sc-view-btn:not(:first-child) {
+    margin-left: -1px;
+}
+
+.sc-view-btn:hover {
+    background: #f8f9fa;
+    z-index: 1;
+}
+
+.sc-view-btn.active {
+    background: #0984e3;
+    border-color: #0984e3;
+    color: #fff;
+    z-index: 2;
+}
+
+.sc-view-btn .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* ==========================================================================
+   Calendar Container
+   ========================================================================== */
+
+.sc-calendar-container {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.sc-calendar {
+    min-height: 500px;
+}
+
+/* FullCalendar Overrides */
+.sc-calendar .fc {
+    font-family: inherit;
+}
+
+.sc-calendar .fc-toolbar-title {
+    font-size: 1.4em !important;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.sc-calendar .fc-button {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+}
+
+.sc-calendar .fc-button-primary {
+    background-color: #0984e3 !important;
+    border-color: #0984e3 !important;
+}
+
+.sc-calendar .fc-button-primary:hover {
+    background-color: #0773c8 !important;
+    border-color: #0773c8 !important;
+}
+
+.sc-calendar .fc-button-primary:disabled {
+    background-color: #74b9ff !important;
+    border-color: #74b9ff !important;
+}
+
+.sc-calendar .fc-daygrid-day-number {
+    padding: 8px;
+    font-weight: 500;
+}
+
+.sc-calendar .fc-daygrid-day.fc-day-today {
+    background: rgba(9, 132, 227, 0.08) !important;
+}
+
+.sc-calendar .fc-event {
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.sc-calendar .fc-event:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sc-calendar .fc-daygrid-event-dot {
+    border-color: currentColor !important;
+}
+
+.sc-calendar .fc-list-event:hover td {
+    background: rgba(9, 132, 227, 0.05) !important;
+}
+
+/* ==========================================================================
+   Legend
+   ========================================================================== */
+
+.sc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 12px 15px;
+    margin-top: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.sc-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #495057;
+}
+
+.sc-legend-subcal {
+    cursor: default;
+}
+
+.sc-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.sc-legend-pubblico {
+    background: #0984e3;
+}
+
+.sc-legend-privato {
+    background: #6c5ce7;
+}
+
+.sc-legend-google {
+    background: #00b894;
+}
+
+/* ==========================================================================
+   Modal
+   ========================================================================== */
+
+.sc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sc-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.sc-modal-content {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: sc-modal-in 0.2s ease-out;
+}
+
+@keyframes sc-modal-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.sc-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #f1f3f4;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1;
+}
+
+.sc-modal-close:hover {
+    background: #e8eaeb;
+}
+
+.sc-modal-body {
+    padding: 25px;
+}
+
+/* Event Detail */
+.sc-event-detail {
+    
+}
+
+.sc-event-title {
+    margin: 0 0 15px;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #2d3436;
+    padding-right: 30px;
+}
+
+.sc-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    color: #636e72;
+    font-size: 14px;
+}
+
+.sc-event-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sc-event-meta .dashicons,
+.sc-event-meta .sc-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #0984e3;
+}
+
+.sc-event-classi {
+    font-size: 14px;
+    color: #636e72;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.sc-event-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+/* Event List Select Modal */
+.sc-event-list-select h2 {
+    margin: 0 0 5px;
+    font-size: 1.2em;
+    color: #2d3436;
+    text-transform: capitalize;
+}
+
+.sc-event-list-subtitle {
+    color: #636e72;
+    font-size: 14px;
+    margin: 0 0 20px;
+}
+
+.sc-event-list-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sc-event-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 4px solid #0984e3;
+}
+
+.sc-event-list-item:hover {
+    background: #e9ecef;
+    transform: translateX(3px);
+}
+
+.sc-event-list-item.sc-vis-privato {
+    border-left-color: #6c5ce7;
+}
+
+.sc-event-list-item.sc-source-google {
+    border-left-color: #00b894;
+}
+
+.sc-event-list-item.sc-source-ical {
+    border-left-color: #fdcb6e;
+}
+
+.sc-event-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0984e3;
+    min-width: 50px;
+}
+
+.sc-event-time.sc-all-day {
+    font-size: 11px;
+    color: #636e72;
+}
+
+.sc-event-title-list {
+    flex: 1;
+    font-size: 14px;
+    color: #2d3436;
+}
+
+.sc-badge-small {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #6c5ce7;
+    color: #fff;
+}
+
+.sc-event-arrow {
+    color: #b2bec3;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.sc-back-to-list {
+    background: none;
+    border: none;
+    color: #0984e3;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.sc-back-to-list:hover {
+    text-decoration: underline;
+}
+
+.sc-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sc-badge-privato {
+    background: #6c5ce7;
+    color: #fff;
+}
+
+.sc-badge-google {
+    background: #00b894;
+    color: #fff;
+}
+
+.sc-badge-ical {
+    background: #fdcb6e;
+    color: #2d3436;
+}
+
+.sc-event-description {
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+    color: #495057;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   Event List Shortcode
+   ========================================================================== */
+
+.sc-event-list {
+    
+}
+
+.sc-list-date {
+    font-weight: 600;
+    font-size: 14px;
+    color: #2d3436;
+    padding: 10px 0 5px;
+    border-bottom: 2px solid #0984e3;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+}
+
+.sc-list-event {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #0984e3;
+    transition: background 0.2s;
+}
+
+.sc-list-event:hover {
+    background: #e9ecef;
+}
+
+.sc-list-event.sc-event-privato {
+    border-left-color: #6c5ce7;
+}
+
+.sc-list-event.sc-event-source-google {
+    border-left-color: #00b894;
+}
+
+.sc-list-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0984e3;
+    min-width: 45px;
+}
+
+.sc-list-title {
+    flex: 1;
+    font-size: 14px;
+    color: #2d3436;
+}
+
+.sc-list-plesso {
+    font-size: 12px;
+    color: #636e72;
+    background: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.sc-list-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.sc-list-empty {
+    padding: 20px;
+    text-align: center;
+    color: #636e72;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   Widget Shortcode
+   ========================================================================== */
+
+.sc-widget {
+    
+}
+
+.sc-widget-title {
+    margin: 0 0 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2d3436;
+}
+
+.sc-widget-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sc-widget-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.sc-widget-event:last-child {
+    border-bottom: none;
+}
+
+.sc-widget-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0984e3;
+    background: rgba(9, 132, 227, 0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.sc-widget-title {
+    font-size: 14px;
+    color: #2d3436;
+    line-height: 1.4;
+}
+
+.sc-widget-empty {
+    color: #636e72;
+    font-size: 14px;
+    text-align: center;
+    padding: 15px;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .sc-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .sc-filter-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .sc-filter-group select {
+        width: 100%;
+    }
+    
+    .sc-filter-views {
+        margin-left: 0;
+        justify-content: center;
+    }
+    
+    .sc-calendar .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .sc-calendar .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .sc-modal-content {
+        margin: 10px;
+        max-height: 90vh;
+    }
+    
+    .sc-legend {
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode Support (optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .sc-calendar-wrapper {
+        /* Add dark mode styles if needed */
+    }
+}
+
+/* ==========================================================================
+   Tooltip
+   ========================================================================== */
+
+.sc-event-tooltip {
+    position: absolute;
+    z-index: 10000;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+    max-width: 300px;
+    min-width: 200px;
+    pointer-events: none;
+    animation: sc-tooltip-fade-in 0.15s ease-out;
+}
+
+@keyframes sc-tooltip-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sc-tooltip-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #2d3436;
+    margin-bottom: 6px;
+}
+
+.sc-tooltip-time {
+    font-size: 12px;
+    color: #636e72;
+    margin-bottom: 8px;
+}
+
+.sc-tooltip-subcal {
+    margin-bottom: 8px;
+}
+
+.sc-tooltip-row {
+    font-size: 12px;
+    color: #636e72;
+    margin-bottom: 4px;
+}
+
+.sc-sub-cal-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   Modal improvements
+   ========================================================================== */
+
+.sc-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #636e72;
+}
+
+.sc-meta-row .sc-icon {
+    flex-shrink: 0;
+    color: #b2bec3;
+}
+
+.sc-meta-row span {
+    word-break: break-word;
+}
+
+.sc-sub-calendari {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.sc-map-link {
+    text-decoration: none;
+    margin-left: 4px;
+}
+
+.sc-badge-booking {
+    background-color: #00cec9;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Export Buttons
+   ========================================================================== */
+
+.sc-export-buttons {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sc-export-label {
+    font-size: 13px;
+    color: #636e72;
+}
+
+.sc-export-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.sc-export-google {
+    background: #fff;
+    color: #4285f4;
+    border: 1px solid #4285f4;
+}
+
+.sc-export-google:hover {
+    background: #4285f4;
+    color: #fff;
+}
+
+.sc-export-ics {
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+}
+
+.sc-export-ics:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Event Form
+   ========================================================================== */
+
+.sc-event-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.sc-event-form {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.sc-form-row {
+    margin-bottom: 20px;
+}
+
+.sc-form-row label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.sc-form-row input[type="text"],
+.sc-form-row input[type="date"],
+.sc-form-row input[type="time"],
+.sc-form-row textarea,
+.sc-form-row select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.sc-form-row input:focus,
+.sc-form-row textarea:focus,
+.sc-form-row select:focus {
+    outline: none;
+    border-color: #0984e3;
+}
+
+.sc-form-row small {
+    display: block;
+    margin-top: 4px;
+    color: #888;
+    font-size: 12px;
+}
+
+.sc-form-row-inline {
+    display: flex;
+    gap: 15px;
+}
+
+.sc-form-row-inline > div {
+    flex: 1;
+}
+
+.sc-form-row input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+.sc-form-submit {
+    width: 100%;
+    padding: 12px 20px;
+    background: #0984e3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.sc-form-submit:hover {
+    background: #0773c8;
+}
+
+.sc-form-message {
+    margin-top: 15px;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.sc-form-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.sc-form-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ==========================================================================
+   My Events
+   ========================================================================== */
+
+.sc-my-events-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sc-my-events-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.sc-my-events-header h3 {
+    margin: 0;
+}
+
+.sc-admin-badge {
+    background: #6c5ce7;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.sc-my-events-filters {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.sc-my-events-filters label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.sc-my-events-list {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.sc-events-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sc-events-table th,
+.sc-events-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.sc-events-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.sc-events-table tr:hover {
+    background: #f8f9fa;
+}
+
+.sc-event-past {
+    opacity: 0.6;
+}
+
+.sc-event-past td {
+    color: #888;
+}
+
+.sc-actions {
+    white-space: nowrap;
+}
+
+.sc-btn-edit,
+.sc-btn-delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+
+.sc-btn-edit {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.sc-btn-edit:hover {
+    background: #1976d2;
+    color: #fff;
+}
+
+.sc-btn-delete {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.sc-btn-delete:hover {
+    background: #c62828;
+    color: #fff;
+}
+
+.sc-loading,
+.sc-no-events {
+    padding: 30px;
+    text-align: center;
+    color: #666;
+}
+
+/* Edit Modal */
+.sc-edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sc-edit-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.sc-edit-modal-content {
+    position: relative;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.sc-edit-modal-content h3 {
+    margin: 0 0 20px 0;
+}
+
+.sc-edit-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.sc-edit-modal-close:hover {
+    color: #333;
+}
+
+.sc-form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.sc-form-cancel {
+    flex: 1;
+    padding: 12px 20px;
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sc-form-cancel:hover {
+    background: #e9ecef;
+}
+
+/* Quick Form (nel modal) */
+.sc-quick-form {
+    padding: 5px;
+}
+
+.sc-quick-form h2 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+}
+
+.sc-quick-form .sc-form-row {
+    margin-bottom: 15px;
+}
+
+.sc-quick-form .sc-form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.sc-quick-form input[type="text"],
+.sc-quick-form input[type="date"],
+.sc-quick-form input[type="time"],
+.sc-quick-form textarea,
+.sc-quick-form select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.sc-quick-form .sc-form-row-inline {
+    display: flex;
+    gap: 10px;
+}
+
+.sc-quick-form .sc-form-row-inline > div {
+    flex: 1;
+}
+
+.sc-quick-form .sc-form-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.sc-quick-form .sc-form-submit {
+    flex: 2;
+    padding: 10px 15px;
+    background: #0984e3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sc-quick-form .sc-form-submit:hover {
+    background: #0773c8;
+}
+
+.sc-quick-form .sc-form-cancel {
+    flex: 1;
+    padding: 10px 15px;
+}
+
+.sc-btn-duplicate {
+    flex: 1;
+    padding: 10px 15px;
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sc-btn-duplicate:hover {
+    background: #ffc107;
+    color: #000;
+}
+
+.sc-quick-form .sc-btn-delete {
+    flex: 1;
+    padding: 10px 15px;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sc-quick-form .sc-btn-delete:hover {
+    background: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    .sc-filters,
+    .sc-filter-views,
+    .sc-modal {
+        display: none !important;
+    }
+    
+    .sc-calendar-container {
+        border: none;
+        padding: 0;
+    }
+    
+    .sc-calendar .fc-button {
+        display: none !important;
+    }
+}
+
+/* Sub-calendario checkboxes nel form */
+.sc-subcal-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sc-subcal-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.15s;
+}
+
+.sc-subcal-option:hover {
+    border-color: var(--sc-color);
+}
+
+.sc-subcal-option input {
+    display: none;
+}
+
+.sc-subcal-option input:checked + .sc-subcal-color {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sc-color);
+}
+
+.sc-subcal-option input:checked ~ span:last-child {
+    font-weight: 600;
+}
+
+.sc-subcal-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: var(--sc-color);
+}
